@@ -1,0 +1,73 @@
+{
+  "name": "mudmin",
+  "version": "0.0.1",
+  "description": "vueJS museUI admin",
+  "main": "index.html",
+  "scripts": {
+    "test": "test/index.js",
+    "start": "npm run start-parcel",
+    "start-serve": "serve .",
+    "start-parcel": "parcel serve index.html --port=8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdll/mudmin.git"
+  },
+  "keywords": [
+    "mudmin"
+  ],
+  "author": "cdll",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cdll/mudmin/issues"
+  },
+  "homepage": "https://github.com/cdll/mudmin#readme",
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.1",
+    "babel-core": "^6.26.3",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "parcel-bundler": "1.12.3",
+    "pug": "^2.0.4",
+    "serve": "^11.3.0",
+    "vue-template-compiler": "2.6.8"
+  },
+  "dependencies": {
+    "muse-ui": "^3.0.2",
+    "vue": "2.6.8",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-router": "^3.1.6"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "last 8 versions",
+              "iOS 8"
+            ]
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "transform-vue-jsx",
+        "transform-runtime",
+        [
+          "import",
+          {
+            "libraryName": "muse-ui",
+            "libraryDirectory": "lib",
+            "camel2DashComponentName": false
+          }
+        ]
+      ]
+    ],
+    "ignore": false
+  }
+}
