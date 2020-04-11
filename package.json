@@ -5,9 +5,11 @@
   "main": "index.html",
   "scripts": {
     "test": "test/index.js",
-    "start": "npm run start-parcel",
-    "start-serve": "serve .",
-    "start-parcel": "parcel serve index.html --port=8080"
+    "start": "npm run start:parcel",
+    "start:serve": "serve ./dist/",
+    "prebuild": "rm -rf dist/**",
+    "test:parcel": "npm run prebuild&& APP_ENV=develop parcel build index.html --out-dir=dist/www/ --public-url=/www/ && cp dist/www/index.html dist/index.html",
+    "start:parcel": "APP_ENV=local parcel serve index.html --port=8080"
   },
   "repository": {
     "type": "git",
