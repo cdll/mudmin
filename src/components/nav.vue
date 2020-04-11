@@ -1,12 +1,6 @@
 
 <template lang='pug'>
-  //- <ul>
-    <li class="" v-for='(el, i) in navList'>
-      <a class="" :href='el.url' v-text='el.name'></a>
-    </li>
-  //- </ul>
-  mu-appbar(
-    title='Mudmin'
+  mu-appbar.header-navbar(
     color='lightgray'
   )
     mu-text-field.appbar-search-field(
@@ -29,6 +23,7 @@
       mu-icon(
         :value='menuOpened? "arrow_back": "menu"'
       )
+    h4 {{ currentRoute().title }}
 
     mu-drawer(
       :open='menuOpened'
@@ -69,15 +64,15 @@
           button
           v-for='(el, il) in navList'
           :key='il'
-          :title='el.name'
-          :href='"#"+ el.url'
+          :title='el.title'
+          :href='"#"+ el.path'
           @click='toggleMenu(false)'
         )
           mu-list-item-action
             mu-icon(
               :value='el.icon'
             )
-          mu-list-item-title {{el.name}}
+          mu-list-item-title {{el.title}}
         //- mu-list-item
           mu-button(
             raised
@@ -88,40 +83,50 @@
 </template>
 
 <script>
+  import {
+    config
+  } from '../js/routes.js'
+
   module.exports= {
-    data() {
+    data () {
       return {
-        navList: [
-          {
-            name: '主页'
-            ,url: '/home'
-            ,icon: 'home'
-          }
-          ,{
-            name: '登陆'
-            ,url: '/login'
-            ,icon: 'forward'
-          }
-        ]
+        navList: config.routes
         ,menuOpened: false
         ,menuDocked: true
       }
     }
     ,methods: {
-      toggleMenu (flag){
+      // method:
+      toggleMenu (flag) {
         this.menuOpened= flag=== undefined
           ? !this.menuOpened
           : flag
       }
-      ,login (){
+      // method:
+      ,login () {
         console.info(this.route)
+      }
+      // filter:
+      ,currentRoute () {
+        const _targeted= this.navList.filter((el)=> el.path=== this.$route.path)
+        return _targeted.length
+          ? _targeted[0]
+          : {}
       }
     }
   }
 </script>
 
-<style>
+<style lang='less'>
   *{
     transition: all .1s ease-in-out;
+  }
+  .header-navbar{
+    position: fixed;
+    left: 0;
+    right: 0;
+    &+ *{
+      padding-top: 4em;
+    }
   }
 </style>
