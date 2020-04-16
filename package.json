@@ -8,8 +8,9 @@
     "start": "npm run start:parcel",
     "start:serve": "serve ./dist/",
     "prebuild": "rm -rf dist/**",
-    "test:parcel": "npm run prebuild&& APP_ENV=develop parcel build index.html --out-dir=dist/www/ --public-url=/www/ && cp dist/www/index.html dist/index.html",
-    "start:parcel": "APP_ENV=local parcel serve index.html --port=8080"
+    "start:parcel": "APP_ENV=local parcel serve index.html --port=8080",
+    "test:parcel": "npm run prebuild&& APP_ENV=development parcel build index.html --out-dir=dist/www/ --public-url=/www/ && cp dist/www/index.html dist/index.html",
+    "build:parcel": "npm run prebuild&& APP_ENV=production parcel build index.html --out-dir=dist/www/ --public-url=/www/ && cp dist/www/index.html dist/index.html"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,19 @@
     "url": "https://github.com/cdll/mudmin/issues"
   },
   "homepage": "https://github.com/cdll/mudmin#readme",
+  "dependencies": {
+    "muse-ui": "^3.0.2",
+    "typeface-roboto": "0.0.75",
+    "vue": "2.6.8",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-router": "^3.1.6"
+  },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.1.1",
     "babel-core": "^6.26.3",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.7.0",
     "less": "^3.11.1",
@@ -37,12 +46,10 @@
     "serve": "^11.3.0",
     "vue-template-compiler": "2.6.8"
   },
-  "dependencies": {
-    "muse-ui": "^3.0.2",
-    "typeface-roboto": "0.0.75",
-    "vue": "2.6.8",
-    "vue-hot-reload-api": "^2.3.4",
-    "vue-router": "^3.1.6"
+  "_babel": {
+    "presets": [
+      "vue"
+    ]
   },
   "babel": {
     "presets": [
@@ -51,8 +58,8 @@
         {
           "targets": {
             "browsers": [
-              "last 8 versions",
-              "iOS 8"
+              "android 4",
+              "ios 8"
             ]
           }
         }
@@ -66,7 +73,7 @@
           "import",
           {
             "libraryName": "muse-ui",
-            "libraryDirectory": "lib",
+            "libraryDirectory": "es5",
             "camel2DashComponentName": false
           }
         ]

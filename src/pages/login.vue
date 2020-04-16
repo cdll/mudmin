@@ -1,8 +1,4 @@
 
-<!-- <template lang='pug'>
-  mu-form
-</template> -->
-
 <script>
   const _formData= {
     uid: ''
